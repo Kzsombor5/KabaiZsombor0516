@@ -1,28 +1,27 @@
 const express = require('express');
 const axios = require('axios');
- 
 const app = express();
 const PORT = 3000;
  
 app.use(express.json());
  
-// Főoldal
+
 app.get('/', function (req, res) {
-  res.send('Felhasználókezelő API külső adatforrással');
+  res.send('Fut a backend');
 });
  
-// GET /users – összes felhasználó lekérése
+
 app.get('/users', function (req, res) {
   axios.get('https://jsonplaceholder.typicode.com/users')
     .then(function (response) {
       res.json(response.data);
     })
     .catch(function (error) {
-      res.status(500).json({ error: 'Hiba történt a külső API elérésekor.' });
+      res.status(500).json({ error: 'Hiba' });
     });
 });
  
-// POST /users – új felhasználó hozzáadása
+
 app.post('/users', function (req, res) {
   const ujUser = req.body;
  
@@ -36,11 +35,11 @@ app.post('/users', function (req, res) {
       res.status(201).json(response.data);
     })
     .catch(function (error) {
-      res.status(500).json({ error: 'Nem sikerült új felhasználót hozzáadni.' });
+      res.status(500).json({ error: 'Hiba' });
     });
 });
  
-// PUT /users/:id – felhasználó módosítása
+
 app.put('/users/:id', function (req, res) {
   const id = req.params.id;
   const modositas = req.body;
@@ -50,11 +49,11 @@ app.put('/users/:id', function (req, res) {
       res.json(response.data);
     })
     .catch(function (error) {
-      res.status(500).json({ error: 'Nem sikerült a felhasználót módosítani.' });
+      res.status(500).json({ error: 'Hiba' });
     });
 });
  
-// DELETE /users/:id – felhasználó törlése
+
 app.delete('/users/:id', function (req, res) {
   const id = req.params.id;
  
@@ -63,11 +62,11 @@ app.delete('/users/:id', function (req, res) {
       res.json({ message: 'Felhasználó törölve: ' + id });
     })
     .catch(function (error) {
-      res.status(500).json({ error: 'Nem sikerült törölni a felhasználót.' });
+      res.status(500).json({ error: 'Hiba.' });
     });
 });
  
-// Szerver indítása
+
 app.listen(PORT, function () {
-  console.log('Szerver fut a http://localhost:' + PORT + ' címen');
+  console.log('Fut a szerver http://localhost:' + PORT );
 });
