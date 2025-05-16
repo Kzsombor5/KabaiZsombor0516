@@ -26,7 +26,7 @@ app.post('/users', function (req, res) {
   const ujUser = req.body;
  
   if (!ujUser.id || !ujUser.name || !ujUser.email) {
-    res.status(400).json({ error: 'Hiányzik az id, name vagy email mező.' });
+    res.status(400).json({ error: 'Hiányzik az id vagy name vagy email mező.' });
     return;
   }
  
